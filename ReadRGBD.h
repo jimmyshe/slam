@@ -1,6 +1,6 @@
 
 #pragma once
-#include <fstream>;
+#include <fstream>
 #include <vector>
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
 

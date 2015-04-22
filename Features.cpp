@@ -11,13 +11,13 @@ Features::Features():ReadRGBD("C:/Users/cq2essz/Documents/Visual Studio 2013/Pro
 {
 	/*The following detector types are supported:
 
-	"FAST" ¨C FastFeatureDetector
-	"STAR" ¨C StarFeatureDetector
-	"SIFT" ¨C SIFT (nonfree module)
-	"SURF" ¨C SURF (nonfree module)
-	"ORB" ¨C ORB
-	"BRISK" ¨C BRISK
-	"MSER" ¨C MSER
+	"FAST" ï¿½C FastFeatureDetector
+	"STAR" ï¿½C StarFeatureDetector
+	"SIFT" ï¿½C SIFT (nonfree module)
+	"SURF" ï¿½C SURF (nonfree module)
+	"ORB" ï¿½C ORB
+	"BRISK" ï¿½C BRISK
+	"MSER" ï¿½C MSER
 	*/
 
 	cv::initModule_nonfree();   // only needed when using surf or sift
@@ -35,8 +35,8 @@ Features::Features():ReadRGBD("C:/Users/cq2essz/Documents/Visual Studio 2013/Pro
 
 Features::~Features()
 {
-	delete detector;
-	delete extractor;
+	//delete detector;
+	//delete extractor;
 }
 
 
@@ -59,7 +59,7 @@ bool Features::updataframe_old()
 
 void Features::updataframe()
 {
-	while (capture(rgb, d, timestamp)==false)
+	while (!capture(rgb, d, timestamp))
 	{
 		std::cout << "no data!! wait for one second " << std::endl;
 		waitKey(1000);
@@ -73,7 +73,7 @@ void Features::updataframe()
 
 bool Features::features_test()
 {
-	if (updataframe_old() == false)
+	if (!updataframe_old())
 	{
 		return false;
 	}
