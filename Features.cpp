@@ -7,7 +7,7 @@
 
 using namespace cv;
 
-Features::Features():ReadRGBD("C:/Users/cq2essz/Documents/Visual Studio 2013/Projects/slam/rgbd_dataset")
+Features::Features():ReadRGBD("/home/ial/workspace/rgbd_dataset_freiburg2_large_with_loop")
 {
 	/*The following detector types are supported:
 

@@ -11,7 +11,7 @@ using namespace cv;
 mainloop::mainloop()
 {
 	matcher = DescriptorMatcher::create("FlannBased"); 
-	/*descriptorMatcherType ¨C
+	/*descriptorMatcherType ï¿½C
 	Descriptor matcher type.Now the following matcher types are supported :
 
 	BruteForce(it uses L2)
@@ -111,7 +111,7 @@ void mainloop::maching()
 
 	for (int i = 0; i < pr_descriptors.rows; i++)
 	{
-		if (matches[i].distance <= max(2 * min_dist, 0.1))
+		if (matches[i].distance <= max(2 * min_dist, 0.02))
 		{
 			good_matches.push_back(matches[i]);
 		}
