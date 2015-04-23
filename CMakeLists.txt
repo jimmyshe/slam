@@ -6,8 +6,8 @@ find_package( OpenCV REQUIRED )
 set(SOURCE_FILES
     Features.cpp
     Features.h
-    mainloop.cpp
-    mainloop.h
+    MainLoop.cpp
+    MainLoop.h
     ReadRGBD.cpp
     ReadRGBD.h
     源.cpp)
