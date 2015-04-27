@@ -120,25 +120,36 @@ void MainLoop::matching()
 
 void MainLoop::find_homograph()
 {
-
+	int minfeatures = 5;
 	std::vector<Point2f> pr;
 	std::vector<Point2f> cu;
-	int i;
-	for ( i = 0; i < good_matches.size(); i++)
-	{
-		//-- Get the keypoints from the good matches
-		pr.push_back(pr_keypoints[good_matches[i].queryIdx].pt);
-		cu.push_back(keypoints[good_matches[i].trainIdx].pt);
-	}
+	
 
-	int minfeatures = 5;
+	
 
-	if (i > minfeatures){
+	if (good_matches.size() >= minfeatures){
+
+		for ( int i = 0; i < good_matches.size(); i++)
+		{
+			//-- Get the keypoints from the good matches
+			pr.push_back(pr_keypoints[good_matches[i].queryIdx].pt);
+			cu.push_back(keypoints[good_matches[i].trainIdx].pt);
+		}
 		H = findHomography(pr, cu, CV_RANSAC).clone();
 	}
 	else
 	{
 		std::cout << "not enough valid features" << std::endl;
+		for (int i = 0; i < matches.size(); i++)
+		{
+			//-- Get the keypoints from the all matches
+			pr.push_back(pr_keypoints[matches[i].queryIdx].pt);
+			cu.push_back(keypoints[matches[i].trainIdx].pt);
+		}
+
+		H = findHomography(pr, cu, CV_RANSAC).clone();
+
+
 	}
 
 	return;
