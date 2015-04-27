@@ -1,14 +1,13 @@
-#include "mainloop.h"
+#include "MainLoop.h"
 #include <opencv2/highgui/highgui.hpp>
 #include "opencv2/nonfree/features2d.hpp"
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
 #include <iostream>
-#include <omp.h> 
 
 using namespace cv;
 
-mainloop::mainloop()
+MainLoop::MainLoop()
 {
 	matcher = DescriptorMatcher::create("FlannBased"); 
 	/*descriptorMatcherType ¨C
@@ -23,12 +22,12 @@ mainloop::mainloop()
 }
 
 
-mainloop::~mainloop()
+MainLoop::~MainLoop()
 {
 }
 
 
-void mainloop::ini()
+void MainLoop::ini()
 {
 	updataframe(); // initialize first frame 
 						// rgb,d, keypoints,timestamp will be the first frame in dataset 
@@ -36,7 +35,7 @@ void mainloop::ini()
 
 
 
-void mainloop::run()
+void MainLoop::run()
 {
 	ini();
 
@@ -44,7 +43,7 @@ void mainloop::run()
 }
 
 
-void mainloop::debug_features()
+void MainLoop::debug_features()
 {
 
 	while (features_test())
@@ -65,15 +64,15 @@ void mainloop::debug_features()
 
 
 
-void mainloop::debug_features_mataching()   
+void MainLoop::debug_features_matching()   
 {
 	ini();
 	while (true)
 	{
 		copy_old_frame();
 		updataframe();
-		maching();
-		find_homography();
+		matching();
+		find_homograph();
 		showmatches();
 		waitKey(10);
 	}
@@ -82,7 +81,7 @@ void mainloop::debug_features_mataching()
 
 }
 
-void mainloop::copy_old_frame()
+void MainLoop::copy_old_frame()
 {
 	pr_rgb = rgb.clone();
 	pr_d = d.clone();
@@ -93,7 +92,7 @@ void mainloop::copy_old_frame()
 	return;
 }
 
-void mainloop::maching()
+void MainLoop::matching()
 {
 	
 	matcher->match(pr_descriptors, descriptors, matches);
@@ -101,7 +100,7 @@ void mainloop::maching()
 	good_matches.clear();
 	//-- Quick calculation of max and min distances between keypoints
 	double max_dist = 0; double min_dist = 100;
-#pragma omp parallel for  
+
 	for (int i = 0; i < pr_descriptors.rows; i++)
 	{
 		double dist = matches[i].distance;
@@ -119,7 +118,7 @@ void mainloop::maching()
 	return;
 }
 
-void mainloop::find_homography()
+void MainLoop::find_homograph()
 {
 
 	std::vector<Point2f> pr;
@@ -149,7 +148,7 @@ void mainloop::find_homography()
 
 
 
-void mainloop::showmatches()
+void MainLoop::showmatches()
 {
 	Mat img_matches;
 	drawMatches(pr_rgb, pr_keypoints, rgb, keypoints,good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);//-- Draw matches

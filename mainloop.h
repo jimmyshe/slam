@@ -3,17 +3,17 @@
 
 
 
-class mainloop :
+class MainLoop :
 	private Features
 {
 public:
-	mainloop();
-	~mainloop();
+	MainLoop();
+	~MainLoop();
 	void ini();
 	void run();
 	void debug_features();
-	void debug_features_mataching();
-	void find_homography();
+	void debug_features_matching();
+	
 
 private:
 
@@ -28,9 +28,9 @@ private:
 	std::vector<cv::DMatch > good_matches;
 	cv::Mat H;
 
-
+	void find_homograph();
 	void copy_old_frame();       
-	void maching();
+	void matching();
 	void showmatches();
 
 	cv::Ptr<cv::DescriptorMatcher> matcher;

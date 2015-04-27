@@ -35,8 +35,7 @@ Features::Features():ReadRGBD("C:/Users/cq2essz/Documents/Visual Studio 2013/Pro
 
 Features::~Features()
 {
-	delete detector;
-	delete extractor;
+
 }
 
 

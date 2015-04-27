@@ -11,7 +11,7 @@
 
 //#include "ReadRGBD.h"
 //#include "Features.h"
-#include "mainloop.h"
+#include "MainLoop.h"
 
 
 
@@ -25,8 +25,8 @@ void debug_features();
 int main(int argc, char *argv[])
 {	
 
-	mainloop slam;
-	slam.debug_features_mataching();
+	MainLoop slam;
+	slam.debug_features_matching();
 	//slam.debug_features();
 	return 0;
 }
