@@ -90,7 +90,7 @@ bool Features::features_test()
 void Features::project_points()
 {
 
-	feature_point3_vector.clear();
+	feature_point3_cloud.clear();
 	for (int i = 0; i < keypoints.size(); i++)
 	{
 		auto d_val = d.at<unsigned short>(keypoints.at(i).pt.y, keypoints.at(i).pt.x);
@@ -99,7 +99,7 @@ void Features::project_points()
 			double z = d_val / 10000.0;   //convert to m
 			double x = (keypoints.at(i).pt.x - cx) * z / fx;
 			double y = (keypoints.at(i).pt.y - cy) * z / fy;
-			feature_point3_vector.push_back(Point3d(x, y, z));
+			feature_point3_cloud.push_back(Point3d(x, y, z));
 		}
 	}
 }
