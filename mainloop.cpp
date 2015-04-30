@@ -58,12 +58,6 @@ void MainLoop::debug_features()
 }
 
 
-
-
-
-
-
-
 void MainLoop::debug_features_matching()   
 {
 	ini();
@@ -99,7 +93,7 @@ void MainLoop::matching()
 
 	good_matches.clear();
 	//-- Quick calculation of max and min distances between keypoints
-	double max_dist = 0; double min_dist = 100;
+	double max_dist = 0.0; double min_dist = 100.0;
 
 	for (int i = 0; i < pr_descriptors.rows; i++)
 	{
@@ -123,10 +117,6 @@ void MainLoop::find_homograph()
 	int minfeatures = 5;
 	std::vector<Point2f> pr;
 	std::vector<Point2f> cu;
-	
-
-	
-
 	if (good_matches.size() >= minfeatures){
 
 		for ( int i = 0; i < good_matches.size(); i++)

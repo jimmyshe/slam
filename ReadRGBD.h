@@ -9,7 +9,7 @@
 class ReadRGBD             //read frome data set
 {
 public:
-	ReadRGBD(std::string);
+	explicit ReadRGBD(std::string);
 	~ReadRGBD();
 	bool capture(cv::Mat& rgb_frame, cv::Mat& d_frame, double& timestamp);
 

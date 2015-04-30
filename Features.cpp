@@ -3,6 +3,7 @@
 #include "opencv2/nonfree/features2d.hpp"
 #include <opencv2/nonfree/nonfree.hpp> 
 #include <iostream>
+#include "camera_config.h"
 
 
 using namespace cv;
@@ -63,8 +64,10 @@ void Features::updataframe()
 		std::cout << "no data!! wait for one second " << std::endl;
 		waitKey(1000);
 	}
+	keypoints.clear();
 	detector->detect(rgb, keypoints);
 	extractor->compute(rgb, keypoints, descriptors);
+	project_points();
 }
 
 
@@ -84,3 +87,19 @@ bool Features::features_test()
 	return true;
 }
 
+void Features::project_points()
+{
+
+	feature_point3_vector.clear();
+	for (int i = 0; i < keypoints.size(); i++)
+	{
+		auto d_val = d.at<unsigned short>(keypoints.at(i).pt.y, keypoints.at(i).pt.x);
+		if (min_dis < d_val && d_val < max_dis)       
+		{                 
+			double z = d_val / 10000.0;   //convert to m
+			double x = (keypoints.at(i).pt.x - cx) * z / fx;
+			double y = (keypoints.at(i).pt.y - cy) * z / fy;
+			feature_point3_vector.push_back(Point3d(x, y, z));
+		}
+	}
+}

@@ -29,7 +29,7 @@ bool ReadRGBD::capture(cv::Mat& rgb_frame,cv::Mat& d_frame, double& timestamp)
 
 	timestamp = RGB_timestamp.at(index);
 	rgb_frame = cv::imread(RGB_filelist.at(index), 1);
-	d_frame = cv::imread(D_filelist.at(index), 1);
+	d_frame = cv::imread(D_filelist.at(index), CV_LOAD_IMAGE_ANYDEPTH);
 	index++;
 	return true;
 }

@@ -35,7 +35,7 @@ private:
 
 	cv::Ptr<cv::DescriptorMatcher> matcher;
 	
-
+	
 
 };
 
