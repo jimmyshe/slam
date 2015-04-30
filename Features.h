@@ -18,7 +18,6 @@ public:
 	double timestamp;
 	std::vector<cv::KeyPoint> keypoints;
 	cv::Mat descriptors;
-	
 	std::vector<cv::Point3d> feature_point3_cloud;
 
 
@@ -31,9 +30,9 @@ private:
 	cv::Ptr<cv::DescriptorExtractor> extractor;
 	cv::Ptr<cv::FeatureDetector> detector;
 
-	void project_points();
+	void project_points();   
 
-
+	//camera parameters
 	double fx = 525.0;
 	double fy = 525.0; //  focal length
 	double cx = 319.5;
