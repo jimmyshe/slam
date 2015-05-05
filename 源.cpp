@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 {	
 
 	MainLoop slam;
-	slam.debug_features_matching();
+	slam.run();
 	//slam.debug_features();
 	return 0;
 }
