@@ -27,12 +27,13 @@ private:
 	std::vector<cv::DMatch > matches;
 	std::vector<cv::DMatch > good_matches;
 	cv::Mat H;
+	cv::Mat pose;
 
 	void find_homograph();
 	void copy_old_frame();       
 	void matching();
 	void showmatches();
-
+	void cameraPoseFromHomography();
 	cv::Ptr<cv::DescriptorMatcher> matcher;
 	
 	

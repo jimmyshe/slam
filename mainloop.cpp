@@ -67,6 +67,10 @@ void MainLoop::debug_features_matching()
 		updataframe();
 		matching();
 		find_homograph();
+		cameraPoseFromHomography();
+		std::cout << H<<std::endl;
+		std::cout << pose << std::endl;
+
 		showmatches();
 		waitKey(10);
 	}
@@ -114,7 +118,7 @@ void MainLoop::matching()
 
 void MainLoop::find_homograph()
 {
-	int minfeatures = 5;
+	int minfeatures = 10;
 	std::vector<Point2f> pr;
 	std::vector<Point2f> cu;
 	if (good_matches.size() >= minfeatures){
@@ -155,4 +159,20 @@ void MainLoop::showmatches()
 	drawMatches(pr_rgb, pr_keypoints, rgb, keypoints,good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);//-- Draw matches
 	//drawMatches(pr_rgb, pr_keypoints, rgb, keypoints, matches, img_matches);                                                                                              //draw all the matches
 	imshow("Matches", img_matches);//-- Show detected matches
+}
+
+
+
+void MainLoop::cameraPoseFromHomography()
+{
+	pose = Mat::eye(3, 4, CV_32FC1);      // 3x4 matrix, the camera pose
+	float norm1 = (float)norm(H.col(0));
+	float norm2 = (float)norm(H.col(1));
+	float tnorm = (norm1 + norm2) / 2.0f; // Normalization value
+	cv::normalize(H.col(0) , pose.col(0));   // Normalize the rotation, and copies the column to pose
+	cv::normalize(H.col(1), pose.col(1));   // Normalize the rotation and copies the column to pose
+	Mat p3 = pose.col(0).cross(pose.col(1));   // Computes the cross-product of p1 and p2
+	p3.copyTo(pose.col(2));       // hird column is the crossproduct of columns one and two
+	Mat t = H.col(2) / tnorm;
+	t.copyTo(pose.col(3));  //vector t [R|t] is the last column of pose
 }

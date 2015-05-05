@@ -19,9 +19,9 @@ public:
 
 private:
 	MatrixXd P;   //covariance 
-
-
-
+	MatrixXd H;    //observation jacobian
+	MatrixXd Qt;   //senor noise 
+	void updataObservationJacobian();
 
 };
 
