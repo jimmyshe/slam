@@ -66,7 +66,7 @@ void Features::updataframe()
 	}
 	keypoints.clear();
 	detector->detect(rgb, keypoints);
-	extractor->compute(rgb, keypoints, descriptors);
+	//extractor->compute(rgb, keypoints, descriptors);    //‘› ±≤ª”√
 	project_points();
 }
 

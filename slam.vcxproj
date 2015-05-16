@@ -87,7 +87,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\..\..\include;C:\lib\eigen3</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -127,14 +127,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Features.cpp" />
+    <ClCompile Include="LandmarkEKF.cpp" />
     <ClCompile Include="mainloop.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ReadRGBD.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Features.h" />
+    <ClInclude Include="LandmarkEKF.h" />
     <ClInclude Include="mainloop.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="ReadRGBD.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

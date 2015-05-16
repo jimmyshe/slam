@@ -27,6 +27,12 @@
     <ClCompile Include="mainloop.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LandmarkEKF.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ReadRGBD.h">
@@ -38,5 +44,14 @@
     <ClInclude Include="mainloop.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LandmarkEKF.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
