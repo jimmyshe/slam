@@ -126,3 +126,11 @@ void MainLoop::rgbdOdometry()
 	return;
 }
 
+void MainLoop::sampling()
+{
+
+	for (int i = 1; i < number_particles; i++)
+	{
+	}
+
+}

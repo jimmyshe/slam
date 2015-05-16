@@ -37,7 +37,7 @@ private:
 	//Inner functions 
 	void copy_old_frame();
 	void rgbdOdometry();
-
+	void sampling();
 };
 
 
