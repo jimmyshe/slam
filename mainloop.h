@@ -16,15 +16,12 @@ public:
 
 private:
 	//constant 
-	cv::Mat cameraMatrix;
-	cv::Mat distCoeff;
-	int transformationType;
+
 
 	//data
 	cv::Mat pr_rgb;
 	cv::Mat pr_d;
 	double pr_timestamp;
-
 
 	//data for later use
 

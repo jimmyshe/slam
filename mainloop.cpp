@@ -11,12 +11,7 @@ using namespace cv;
 using namespace std;
 MainLoop::MainLoop()
 {
-	float vals[] = { 525., 0., 3.1950000000000000e+02,
-		0., 525., 2.3950000000000000e+02,
-		0., 0., 1. };
-	cameraMatrix = Mat(3, 3, CV_32FC1, vals);
-	distCoeff = Mat(1, 5, CV_32FC1, Scalar(0));
-	transformationType = RIGID_BODY_MOTION;
+
 
 
 }
@@ -87,14 +82,23 @@ void MainLoop::cvtDepth2Cloud(const Mat& depth, Mat& cloud, const Mat& cameraMat
 
 void MainLoop::rgbdOdometry()
 {
+	float vals[] = { 525., 0., 3.1950000000000000e+02,
+		0., 525., 2.3950000000000000e+02,
+		0., 0., 1. };
+
+	const Mat cameraMatrix = Mat(3, 3, CV_32FC1, vals);
+	const Mat distCoeff(1, 5, CV_32FC1, Scalar(0));
+
+
+
+
 	Mat grayImage0, grayImage1, depthFlt0, depthFlt1;
 
 	cvtColor(pr_rgb, grayImage0, CV_BGR2GRAY);
 	cvtColor(rgb, grayImage1, CV_BGR2GRAY);
-	pr_d.convertTo(depthFlt0, CV_32FC1, 1. / 1000);
-	d.convertTo(depthFlt1, CV_32FC1, 1. / 1000);
+	pr_d.convertTo(depthFlt0, CV_32FC1, 1./10000);
+	d.convertTo(depthFlt1, CV_32FC1, 1./10000);
 	TickMeter tm;
-	Mat Rt;
 
 	vector<int> iterCounts(4);
 	iterCounts[0] = 7;
@@ -108,16 +112,16 @@ void MainLoop::rgbdOdometry()
 	minGradMagnitudes[2] = 3;
 	minGradMagnitudes[3] = 1;
 
-	const float minDepth = 0.f; //in meters
-	const float maxDepth = 4.f; //in meters
+	const float minDepth = 0.8f; //in meters
+	const float maxDepth = 3.5f; //in meters
 	const float maxDepthDiff = 0.07f; //in meters
-
+	Mat Rt;
 	tm.start();
-	bool isFound = cv::RGBDOdometry(Rt, Mat(),
+	RGBDOdometry(Rt, Mat(),
 		grayImage0, depthFlt0, Mat(),
 		grayImage1, depthFlt1, Mat(),
 		cameraMatrix, minDepth, maxDepth, maxDepthDiff,
-		iterCounts, minGradMagnitudes, transformationType);
+		iterCounts, minGradMagnitudes,RIGID_BODY_MOTION);
 	tm.stop();
 
 	cout << "Rt = " << Rt << endl;
